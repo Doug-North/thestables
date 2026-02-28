@@ -7,10 +7,11 @@ const bookingUrl =
 	'https://www.booking.com/hotel/gb/the-stables-cottage-in-the-heart-of-boa-private-garden.en-gb.html?label=gen173bo-10CAsoUEI2dGhlLXN0YWJsZXMtY290dGFnZS1pbi10aGUtaGVhcnQtb2YtYm9hLXByaXZhdGUtZ2FyZGVuSDNYA2hCiAEBmAEzuAEHyAEM2AED6AEB-AEBiAIBmAIGqAIBuAKC-YrNBsACAdICJDlkZDliNzY1LTgzOTItNGM3MS05MTNhLWUwODQxMjFiMDI2YtgCAeACAQ&sid=7982eaac9a173a8541ae21183a07850c&dist=0&sb_price_type=total&type=total&';
 
 const photos = [
+	{ src: '/images/Front_door.png', alt: 'Cottage front door and Bath stone exterior' },
 	{ src: '/images/boa-garden-path.jpeg', alt: 'Private garden path and cottage exterior' },
 	{ src: '/images/boa-garden-bench.jpeg', alt: 'Garden bench beside Bath stone wall' },
-	{ src: '/images/boa-lounge-dining.jpeg', alt: 'Lounge and dining area in the cottage' },
 	{ src: '/images/boa-lounge-kitchen-wide.jpeg', alt: 'Open plan lounge with kitchen and skylight' },
+	{ src: '/images/boa-lounge-dining.jpeg', alt: 'Lounge and dining area in the cottage' },
 	{ src: '/images/boa-lounge-kitchen-lit.jpeg', alt: 'Cosy lit lounge and kitchen area' },
 	{ src: '/images/boa-kitchenette.jpeg', alt: 'Fully equipped cottage kitchenette' },
 	{ src: '/images/boa-bathroom.jpeg', alt: 'Modern bathroom with bath and vanity' }
@@ -21,6 +22,16 @@ const photos = [
 	<div class="page">
 		<SiteNav currentPath={Astro.url.pathname} />
 		<main>
+			<section class="gallery" aria-label="The Stables photo gallery">
+				<div class="swipe-row">
+					{photos.map((photo, index) => (
+						<figure class="photo-card" style={`--angle:${(index % 2 === 0 ? -1 : 1) * (index % 3)}deg`}>
+							<img src={photo.src} alt={photo.alt} loading="lazy" decoding="async" />
+						</figure>
+					))}
+				</div>
+			</section>
+
 			<header class="hero">
 				<p class="eyebrow">Stay</p>
 				<h1>The Stables</h1>
@@ -36,25 +47,24 @@ const photos = [
 					A quiet, characterful base for couples or solo travellers exploring Wiltshire, Bath and the surrounding countryside,
 					with the train station a stone's throw away.
 				</p>
-				<div class="actions">
-					<a class="cta" href={airbnbUrl} target="_blank" rel="noreferrer">Book on Airbnb</a>
-					<a class="cta ghost" href={bookingUrl} target="_blank" rel="noreferrer">Book on Booking.com</a>
+				<div class="hero-actions">
+					<a class="cta primary" href={airbnbUrl} target="_blank" rel="noreferrer">
+						<img
+							class="brand-icon"
+							src="https://www.airbnb.com/favicon.ico"
+							alt=""
+							aria-hidden="true"
+							loading="lazy"
+							decoding="async"
+						/>
+						<span>Stay with us on Airbnb</span>
+					</a>
+					<a class="cta secondary" href={bookingUrl} target="_blank" rel="noreferrer">
+						<span class="brand-icon brand-booking brand-booking-large" aria-hidden="true">B</span>
+						<span>Stay with us on Booking.com</span>
+					</a>
 				</div>
 			</header>
-
-			<section class="gallery" aria-label="The Stables photo gallery">
-				<div class="gallery-head">
-					<h2>Swipe Through The Cottage</h2>
-					<p>Swipe left on mobile or trackpad-scroll on desktop.</p>
-				</div>
-				<div class="swipe-row">
-					{photos.map((photo, index) => (
-						<figure class="photo-card" style={`--angle:${(index % 2 === 0 ? -1 : 1) * (index % 3)}deg`}>
-							<img src={photo.src} alt={photo.alt} loading="lazy" decoding="async" />
-						</figure>
-					))}
-				</div>
-			</section>
 		</main>
 	</div>
 </Layout>
@@ -72,6 +82,10 @@ const photos = [
 	main {
 		max-width: 980px;
 		margin: 0 auto;
+	}
+
+	.gallery {
+		margin-bottom: 2rem;
 	}
 
 	.hero {
@@ -98,53 +112,73 @@ const photos = [
 		color: #40362b;
 	}
 
-	.actions {
+	.hero-actions {
 		display: flex;
 		flex-wrap: wrap;
 		gap: 0.7rem;
-		margin-top: 1rem;
+		margin-top: 1.2rem;
 	}
 
 	.cta {
 		display: inline-flex;
 		align-items: center;
 		justify-content: center;
+		gap: 0.45rem;
 		text-decoration: none;
-		background: #2f4b39;
-		color: #f6f2eb;
+		padding: 0.7rem 1.06rem;
 		border-radius: 999px;
-		padding: 0.68rem 1.1rem;
-		font-weight: 600;
+		font-weight: 650;
+		font-size: 0.92rem;
+		transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
 	}
 
 	.cta:hover {
-		background: #253b2d;
+		transform: translateY(-1px);
 	}
 
-	.cta.ghost {
-		background: rgba(255, 255, 255, 0.72);
-		color: #2f4b39;
-		border: 1px solid rgba(47, 75, 57, 0.3);
+	.cta.primary {
+		background: #2f4b39;
+		color: #f6f2eb;
+		box-shadow: 0 8px 16px rgba(36, 58, 44, 0.22);
 	}
 
-	.cta.ghost:hover {
-		background: rgba(255, 255, 255, 0.9);
+	.cta.primary:hover {
+		background: #263d2f;
 	}
 
-	.gallery {
-		margin-top: 1.5rem;
+	.cta.secondary {
+		background: #2f4b39;
+		color: #f6f2eb;
+		border: 1px solid transparent;
 	}
 
-	.gallery-head h2 {
-		margin: 0;
-		font-family: 'Palatino Linotype', 'Book Antiqua', Palatino, serif;
-		font-size: clamp(1.45rem, 2.6vw, 2.1rem);
+	.cta.secondary:hover {
+		background: #263d2f;
 	}
 
-	.gallery-head p {
-		margin: 0.4rem 0 0;
-		color: #5a4c39;
-		font-size: 0.9rem;
+	.brand-icon {
+		width: 16px;
+		height: 16px;
+		border-radius: 3px;
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		font-size: 0.62rem;
+		font-weight: 700;
+		line-height: 1;
+		flex: none;
+	}
+
+	.brand-booking {
+		background: #003b95;
+		color: #fff;
+	}
+
+	.brand-booking-large {
+		width: 18px;
+		height: 18px;
+		font-size: 0.74rem;
+		font-weight: 800;
 	}
 
 	.swipe-row {
