@@ -1,0 +1,50 @@
+---
+interface Props {
+	title?: string;
+	description?: string;
+}
+
+const {
+	title = 'Bradford-on-Avon Guide | The Stables',
+	description = 'A friendly local guide to Bradford-on-Avon, with a new place to stay and explore the town for yourself.'
+} = Astro.props;
+---
+
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width" />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<link rel="icon" href="/favicon.ico" />
+		<meta name="generator" content={Astro.generator} />
+		<meta name="description" content={description} />
+		<title>{title}</title>
+	</head>
+	<body>
+		<slot />
+	</body>
+</html>
+
+<style>
+	:root {
+		font-family: 'Avenir Next', 'Avenir', 'Trebuchet MS', sans-serif;
+		line-height: 1.5;
+	}
+
+	* {
+		box-sizing: border-box;
+	}
+
+	html,
+	body {
+		margin: 0;
+		width: 100%;
+		min-height: 100%;
+	}
+
+	body {
+		background: #f5efe4;
+		color: #2d2a26;
+	}
+</style>

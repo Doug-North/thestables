@@ -1,0 +1,13 @@
+name = "bradford-on-avon"
+compatibility_date = "2026-02-26"
+
+[assets]
+directory = "./dist"
+
+[[d1_databases]]
+binding = "DB"
+database_name = "boa_site"
+database_id = "REPLACE_WITH_YOUR_D1_DATABASE_ID"
+
+[vars]
+ADMIN_EMAIL_ALLOWLIST = "douglasnorthca@gmail.com,minnatriinkohv@gmail.com"

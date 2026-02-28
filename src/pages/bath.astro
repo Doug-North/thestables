@@ -1,0 +1,349 @@
+---
+import Layout from '../layouts/Layout.astro';
+import SiteNav from '../components/SiteNav.astro';
+
+const bathHighlights = [
+	{
+		title: 'Roman Baths',
+		duration: 'Aquae Sulis era',
+		summary:
+			'Major construction under Emperor Vespasian (AD 69–79), forming the Aquae Sulis complex dedicated to Sulis Minerva.',
+		image:
+			'https://commons.wikimedia.org/wiki/Special:FilePath/Roman%20Baths%20in%20Bath%20Spa,%20England%20-%20July%202006.jpg',
+		imageAlt: 'The Roman Baths complex in Bath',
+		attributionLabel: 'Diliff (CC BY-SA 3.0)',
+		attributionUrl:
+			'https://commons.wikimedia.org/wiki/File:Roman_Baths_in_Bath_Spa,_England_-_July_2006.jpg'
+	},
+	{
+		title: 'Bath Abbey',
+		duration: 'Coronation site tradition',
+		summary:
+			'Site of King Edgar\'s formal coronation in AD 973, the first with a fully written liturgy; its structure shaped later English coronations.',
+		image:
+			'https://commons.wikimedia.org/wiki/Special:FilePath/Bath%20Abbey%20-%20geograph.org.uk%20-%205662940.jpg',
+		imageAlt: 'Bath Abbey exterior',
+		attributionLabel: 'Graeme Smith (CC BY-SA 2.0)',
+		attributionUrl:
+			'https://commons.wikimedia.org/wiki/File:Bath_Abbey_-_geograph.org.uk_-_5662940.jpg'
+	},
+	{
+		title: 'Georgian Crescents',
+		duration: '18th-century planning',
+		summary:
+			'Royal Crescent, Queen Square, and The Circus by John Wood the Elder and John Wood the Younger.',
+		image: 'https://commons.wikimedia.org/wiki/Special:FilePath/Royal.crescent.aerial.bath.arp.jpg',
+		imageAlt: 'Royal Crescent in Bath',
+		attributionLabel: 'Arpingstone (Public Domain)',
+		attributionUrl:
+			'https://commons.wikimedia.org/wiki/File:Royal.crescent.aerial.bath.arp.jpg'
+	}
+];
+
+const museums = [
+	{
+		title: 'The Holburne Museum',
+		tag: 'Art & culture',
+		summary: 'Fine and decorative arts in a landmark Grade I listed building.',
+		image: 'https://commons.wikimedia.org/wiki/Special:FilePath/Holburne%20Museum,%20Bath.jpg',
+		imageAlt: 'The Holburne Museum in Bath',
+		attributionLabel: 'Adrian Pingstone (Public Domain)',
+		attributionUrl: 'https://commons.wikimedia.org/wiki/File:Holburne_Museum,_Bath.jpg'
+	},
+	{
+		title: 'No. 1 Royal Crescent',
+		tag: 'Georgian life',
+		summary: 'Period interiors that show elite life in Georgian Bath.',
+		image: 'https://commons.wikimedia.org/wiki/Special:FilePath/Royal.crescent.aerial.bath.arp.jpg',
+		imageAlt: 'Royal Crescent in Bath',
+		attributionLabel: 'Arpingstone (Public Domain)',
+		attributionUrl: 'https://commons.wikimedia.org/wiki/File:Royal.crescent.aerial.bath.arp.jpg'
+	},
+	{
+		title: 'Herschel Museum of Astronomy',
+		tag: 'Science history',
+		summary: 'Historic house where William Herschel discovered Uranus.',
+		image:
+			'https://commons.wikimedia.org/wiki/Special:FilePath/William%20Herschel%20Museum.jpg',
+		imageAlt: 'Herschel Museum of Astronomy in Bath',
+		attributionLabel: 'Mike Peel (CC BY-SA 4.0)',
+		attributionUrl:
+			'https://commons.wikimedia.org/wiki/File:William_Herschel_Museum.jpg'
+	},
+	{
+		title: 'Museum of Bath at Work',
+		tag: 'Local industry',
+		summary: 'Tools, workshops, and stories of Bath\'s working history.',
+		image: 'https://commons.wikimedia.org/wiki/Special:FilePath/Museum%20of%20Bath%20at%20Work.jpg',
+		imageAlt: 'Museum of Bath at Work',
+		attributionLabel: 'Derek Harper (CC BY-SA 2.0)',
+		attributionUrl: 'https://commons.wikimedia.org/wiki/File:Museum_of_Bath_at_Work.jpg'
+	}
+];
+
+const kidsIdeas = [
+	{
+		title: 'Royal Victoria Park',
+		tag: 'Playgrounds & open space',
+		summary: 'Big lawns, family play areas, and relaxed picnic space.',
+		image: 'https://upload.wikimedia.org/wikipedia/commons/b/b2/Royalvictoriapark.jpg',
+		imageAlt: 'Royal Victoria Park in Bath',
+		attributionLabel: 'Colin Smith (CC BY-SA 2.0)',
+		attributionUrl: 'https://commons.wikimedia.org/wiki/File:Royalvictoriapark.jpg'
+	},
+	{
+		title: 'Prior Park Landscape Garden',
+		tag: 'Short adventure walks',
+		summary: 'Stepping stones, wooded paths, and the iconic Palladian bridge.',
+		image:
+			'https://upload.wikimedia.org/wikipedia/commons/2/2b/Prior_Park_Bath_Palladian_Bridge.jpg',
+		imageAlt: 'Palladian Bridge at Prior Park, Bath',
+		attributionLabel: 'Infilms (Public Domain)',
+		attributionUrl:
+			'https://commons.wikimedia.org/wiki/File:Prior_Park_Bath_Palladian_Bridge.jpg'
+	},
+	{
+		title: 'Bath Skyline Family Sections',
+		tag: 'Views & nature spotting',
+		summary: 'Choose shorter sections for kid-friendly woodland and valley views.',
+		image:
+			'https://upload.wikimedia.org/wikipedia/commons/9/96/Bath_Skyline_Walk_%2816652630674%29.jpg',
+		imageAlt: 'View over Bath from Bath Skyline walk',
+		attributionLabel: 'Paul Stephenson (CC BY 2.0)',
+		attributionUrl: 'https://commons.wikimedia.org/wiki/File:Bath_Skyline_Walk_(16652630674).jpg'
+	}
+];
+---
+
+<Layout title="Bath Day Trip | The Stables" description="Plan a Bath day trip from Bradford-on-Avon: history, museums, and family-friendly ideas.">
+	<div class="page">
+		<SiteNav currentPath={Astro.url.pathname} />
+		<main>
+			<header class="hero">
+				<p class="eyebrow">Day Trip</p>
+				<h1>Bath</h1>
+				<p class="travel">12–15 minutes by train, 15 minutes by car, 30 minutes by bus</p>
+				<p>
+					Excellent museums, shops, cafes, and views. Please do not hesitate to ask more
+					recommendations from us.
+				</p>
+				<div class="hero-meta">
+					<p><span class="icon icon-route"></span>Easy from BOA</p>
+					<p><span class="icon icon-clock"></span>Half-day or full-day</p>
+					<p><span class="icon icon-map"></span>History + family options</p>
+				</div>
+			</header>
+
+			<section class="section">
+				<h2>Historic Highlights</h2>
+				<div class="card-grid">
+					{bathHighlights.map((item) => (
+						<article class="info-card">
+							<img src={item.image} alt={item.imageAlt} loading="lazy" />
+							<div class="content">
+								<h3>{item.title}</h3>
+								<p class="meta-row"><span class="icon icon-clock"></span><span class="duration">{item.duration}</span></p>
+								<p>{item.summary}</p>
+								<p class="credit">Photo: <a href={item.attributionUrl} target="_blank" rel="noreferrer">{item.attributionLabel}</a></p>
+							</div>
+						</article>
+					))}
+				</div>
+			</section>
+
+			<section class="section">
+				<h2>Museums to Try</h2>
+				<div class="card-grid museums">
+					{museums.map((item) => (
+						<article class="info-card">
+							<img src={item.image} alt={item.imageAlt} loading="lazy" />
+							<div class="content">
+								<h3>{item.title}</h3>
+								<p class="meta-row"><span class="icon icon-map"></span><span class="duration">{item.tag}</span></p>
+								<p>{item.summary}</p>
+								<p class="credit">Photo: <a href={item.attributionUrl} target="_blank" rel="noreferrer">{item.attributionLabel}</a></p>
+							</div>
+						</article>
+					))}
+				</div>
+			</section>
+
+			<section class="section">
+				<h2>Fun Ideas for Kids</h2>
+				<div class="card-grid kids">
+					{kidsIdeas.map((item) => (
+						<article class="info-card">
+							<img src={item.image} alt={item.imageAlt} loading="lazy" />
+							<div class="content">
+								<h3>{item.title}</h3>
+								<p class="meta-row"><span class="icon icon-route"></span><span class="duration">{item.tag}</span></p>
+								<p>{item.summary}</p>
+								<p class="credit">Photo: <a href={item.attributionUrl} target="_blank" rel="noreferrer">{item.attributionLabel}</a></p>
+							</div>
+						</article>
+					))}
+				</div>
+			</section>
+		</main>
+	</div>
+</Layout>
+
+<style>
+	.page {
+		min-height: 100vh;
+		padding: 2rem 1.25rem 3rem;
+		background:
+			radial-gradient(circle at 10% 0%, rgba(182, 132, 58, 0.16), transparent 36%),
+			radial-gradient(circle at 100% 100%, rgba(42, 75, 57, 0.17), transparent 36%),
+			#f5efe4;
+	}
+
+	main {
+		max-width: 980px;
+		margin: 0 auto;
+	}
+
+	.hero {
+		padding-top: 0.7rem;
+	}
+
+	.eyebrow {
+		margin: 0 0 0.4rem;
+		font-size: 0.78rem;
+		letter-spacing: 0.12em;
+		text-transform: uppercase;
+		color: #6e5d43;
+	}
+
+	h1 {
+		font-family: 'Palatino Linotype', 'Book Antiqua', Palatino, serif;
+		font-size: clamp(2rem, 4.8vw, 3.2rem);
+		margin: 0;
+	}
+
+	.hero p {
+		max-width: 68ch;
+		margin: 0.65rem 0 0;
+		color: #40362b;
+	}
+
+	.travel {
+		display: inline-block;
+		padding: 0.22rem 0.58rem;
+		border-radius: 999px;
+		background: #ebe0cc;
+		color: #5b4728;
+		font-size: 0.82rem;
+		font-weight: 600;
+	}
+
+	.hero-meta {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 0.85rem;
+		margin-top: 0.8rem;
+	}
+
+	.hero-meta p {
+		display: inline-flex;
+		align-items: center;
+		gap: 0.4rem;
+		margin: 0;
+		font-size: 0.86rem;
+		color: #5b4c39;
+	}
+
+	.section {
+		margin-top: 1.45rem;
+	}
+
+	.section h2 {
+		margin: 0;
+		font-size: 1.55rem;
+		font-family: 'Palatino Linotype', 'Book Antiqua', Palatino, serif;
+	}
+
+	.card-grid {
+		margin-top: 0.95rem;
+		display: grid;
+		grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+		gap: 1rem;
+	}
+
+	.info-card {
+		background: rgba(255, 255, 255, 0.78);
+		border: 1px solid rgba(96, 74, 43, 0.2);
+		border-radius: 14px;
+		overflow: hidden;
+	}
+
+	.info-card img {
+		width: 100%;
+		height: 170px;
+		object-fit: cover;
+		display: block;
+	}
+
+	.content {
+		padding: 0.9rem;
+	}
+
+	.content h3 {
+		margin: 0;
+		font-size: 1.15rem;
+		font-family: 'Palatino Linotype', 'Book Antiqua', Palatino, serif;
+	}
+
+	.meta-row {
+		display: inline-flex;
+		align-items: center;
+		gap: 0.42rem;
+		margin: 0.55rem 0 0;
+	}
+
+	.duration {
+		display: inline-block;
+		padding: 0.18rem 0.5rem;
+		border-radius: 999px;
+		font-size: 0.78rem;
+		font-weight: 600;
+		background: #ebe0cc;
+		color: #5b4728;
+	}
+
+	.content p {
+		margin: 0.65rem 0 0;
+		color: #3f3429;
+	}
+
+	.credit {
+		font-size: 0.86rem;
+	}
+
+	.credit a {
+		color: #2f4b39;
+		text-decoration: none;
+		font-weight: 600;
+	}
+
+	.credit a:hover {
+		text-decoration: underline;
+	}
+
+	.icon {
+		display: inline-block;
+		width: 0.62rem;
+		height: 0.62rem;
+		border-radius: 999px;
+		background: #78613f;
+		flex: none;
+	}
+
+	.icon-clock {
+		background: #5f7c67;
+	}
+
+	.icon-map {
+		background: #7d5a78;
+	}
+</style>

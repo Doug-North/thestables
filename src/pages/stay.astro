@@ -1,0 +1,213 @@
+---
+import Layout from '../layouts/Layout.astro';
+import SiteNav from '../components/SiteNav.astro';
+
+const airbnbUrl = 'https://airbnb.co.uk/h/thestables-boa';
+const bookingUrl =
+	'https://www.booking.com/hotel/gb/the-stables-cottage-in-the-heart-of-boa-private-garden.en-gb.html?label=gen173bo-10CAsoUEI2dGhlLXN0YWJsZXMtY290dGFnZS1pbi10aGUtaGVhcnQtb2YtYm9hLXByaXZhdGUtZ2FyZGVuSDNYA2hCiAEBmAEzuAEHyAEM2AED6AEB-AEBiAIBmAIGqAIBuAKC-YrNBsACAdICJDlkZDliNzY1LTgzOTItNGM3MS05MTNhLWUwODQxMjFiMDI2YtgCAeACAQ&sid=7982eaac9a173a8541ae21183a07850c&dist=0&sb_price_type=total&type=total&';
+
+const photos = [
+	{ src: '/images/boa-garden-path.jpeg', alt: 'Private garden path and cottage exterior' },
+	{ src: '/images/boa-garden-bench.jpeg', alt: 'Garden bench beside Bath stone wall' },
+	{ src: '/images/boa-lounge-dining.jpeg', alt: 'Lounge and dining area in the cottage' },
+	{ src: '/images/boa-lounge-kitchen-wide.jpeg', alt: 'Open plan lounge with kitchen and skylight' },
+	{ src: '/images/boa-lounge-kitchen-lit.jpeg', alt: 'Cosy lit lounge and kitchen area' },
+	{ src: '/images/boa-kitchenette.jpeg', alt: 'Fully equipped cottage kitchenette' },
+	{ src: '/images/boa-bathroom.jpeg', alt: 'Modern bathroom with bath and vanity' }
+];
+---
+
+<Layout title="Stay at The Stables | Bradford-on-Avon" description="One-bedroom Bath stone cottage in the heart of Bradford-on-Avon, with a private garden.">
+	<div class="page">
+		<SiteNav currentPath={Astro.url.pathname} />
+		<main>
+			<header class="hero">
+				<p class="eyebrow">Stay</p>
+				<h1>The Stables</h1>
+				<p>
+					A one-bedroom Bath stone cottage in the heart of Bradford-on-Avon, with its own private garden,
+					steps from the canal, cafes and historic streets.
+				</p>
+				<p>
+					Inside is calm and uncluttered, with a comfortable double bedroom, modern bathroom and fully equipped kitchen.
+					Wi-Fi and a smart TV suit short breaks or longer stays.
+				</p>
+				<p>
+					A quiet, characterful base for couples or solo travellers exploring Wiltshire, Bath and the surrounding countryside,
+					with the train station a stone's throw away.
+				</p>
+				<div class="actions">
+					<a class="cta" href={airbnbUrl} target="_blank" rel="noreferrer">Book on Airbnb</a>
+					<a class="cta ghost" href={bookingUrl} target="_blank" rel="noreferrer">Book on Booking.com</a>
+				</div>
+			</header>
+
+			<section class="gallery" aria-label="The Stables photo gallery">
+				<div class="gallery-head">
+					<h2>Swipe Through The Cottage</h2>
+					<p>Swipe left on mobile or trackpad-scroll on desktop.</p>
+				</div>
+				<div class="swipe-row">
+					{photos.map((photo, index) => (
+						<figure class="photo-card" style={`--angle:${(index % 2 === 0 ? -1 : 1) * (index % 3)}deg`}>
+							<img src={photo.src} alt={photo.alt} loading="lazy" decoding="async" />
+						</figure>
+					))}
+				</div>
+			</section>
+		</main>
+	</div>
+</Layout>
+
+<style>
+	.page {
+		min-height: 100vh;
+		padding: 2rem 1.25rem 3rem;
+		background:
+			radial-gradient(circle at 10% 0%, rgba(182, 132, 58, 0.16), transparent 36%),
+			radial-gradient(circle at 100% 100%, rgba(42, 75, 57, 0.17), transparent 36%),
+			#f5efe4;
+	}
+
+	main {
+		max-width: 980px;
+		margin: 0 auto;
+	}
+
+	.hero {
+		padding-top: 0.7rem;
+	}
+
+	.eyebrow {
+		margin: 0 0 0.4rem;
+		font-size: 0.78rem;
+		letter-spacing: 0.12em;
+		text-transform: uppercase;
+		color: #6e5d43;
+	}
+
+	h1 {
+		font-family: 'Palatino Linotype', 'Book Antiqua', Palatino, serif;
+		font-size: clamp(2rem, 4.8vw, 3.2rem);
+		margin: 0;
+	}
+
+	.hero p {
+		max-width: 72ch;
+		margin: 0.72rem 0 0;
+		color: #40362b;
+	}
+
+	.actions {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 0.7rem;
+		margin-top: 1rem;
+	}
+
+	.cta {
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		text-decoration: none;
+		background: #2f4b39;
+		color: #f6f2eb;
+		border-radius: 999px;
+		padding: 0.68rem 1.1rem;
+		font-weight: 600;
+	}
+
+	.cta:hover {
+		background: #253b2d;
+	}
+
+	.cta.ghost {
+		background: rgba(255, 255, 255, 0.72);
+		color: #2f4b39;
+		border: 1px solid rgba(47, 75, 57, 0.3);
+	}
+
+	.cta.ghost:hover {
+		background: rgba(255, 255, 255, 0.9);
+	}
+
+	.gallery {
+		margin-top: 1.5rem;
+	}
+
+	.gallery-head h2 {
+		margin: 0;
+		font-family: 'Palatino Linotype', 'Book Antiqua', Palatino, serif;
+		font-size: clamp(1.45rem, 2.6vw, 2.1rem);
+	}
+
+	.gallery-head p {
+		margin: 0.4rem 0 0;
+		color: #5a4c39;
+		font-size: 0.9rem;
+	}
+
+	.swipe-row {
+		margin-top: 0.8rem;
+		display: grid;
+		grid-auto-flow: column;
+		grid-auto-columns: minmax(240px, 36%);
+		gap: 0.8rem;
+		overflow-x: auto;
+		padding: 0.3rem 0.1rem 0.6rem;
+		scroll-snap-type: x mandatory;
+		scrollbar-width: thin;
+	}
+
+	.photo-card {
+		margin: 0;
+		scroll-snap-align: start;
+		border-radius: 16px;
+		overflow: hidden;
+		border: 1px solid rgba(84, 64, 37, 0.3);
+		box-shadow: 0 12px 24px rgba(44, 33, 18, 0.12);
+		transform: rotate(var(--angle));
+		transition: transform 0.22s ease, box-shadow 0.22s ease;
+		background: #fff;
+	}
+
+	.photo-card img {
+		display: block;
+		width: 100%;
+		height: 260px;
+		object-fit: cover;
+	}
+
+	.photo-card:hover {
+		transform: rotate(0deg) translateY(-2px);
+		box-shadow: 0 16px 28px rgba(44, 33, 18, 0.17);
+	}
+
+	@media (max-width: 920px) {
+		.swipe-row {
+			grid-auto-columns: minmax(220px, 62%);
+		}
+
+		.photo-card img {
+			height: 230px;
+		}
+	}
+
+	@media (max-width: 700px) {
+		.page {
+			padding-top: 1.35rem;
+		}
+
+		.swipe-row {
+			grid-auto-columns: minmax(220px, 86%);
+		}
+
+		.photo-card {
+			transform: none;
+		}
+
+		.photo-card img {
+			height: 240px;
+		}
+	}
+</style>

@@ -1,0 +1,338 @@
+---
+import Layout from '../layouts/Layout.astro';
+import SiteNav from '../components/SiteNav.astro';
+
+const venues = [
+	{
+		title: 'Pipit',
+		duration: '2-3 mins',
+		summary: 'Best pastries and coffee in town.',
+		image:
+			'https://commons.wikimedia.org/wiki/Special:FilePath/Bradford%20on%20Avon%20town%20bridge.jpg',
+		imageAlt: 'Central Bradford-on-Avon near cafes and bakeries',
+		attributionLabel: 'Charles Miller (CC BY 2.0)',
+		attributionUrl: 'https://commons.wikimedia.org/wiki/File:Bradford_on_Avon_town_bridge.jpg',
+		isPlaceholder: true
+	},
+	{
+		title: 'Little Rituals',
+		duration: '2-3 mins',
+		summary: 'Great coffee and atmosphere, a local favourite.',
+		image:
+			'https://images.squarespace-cdn.com/content/v1/62740281b654e40a1b117160/e9dc46e6-5fc6-4366-92db-74c2f885fcac/406AD9D2-B2CB-475A-B4AF-1452FED2A611.jpg',
+		imageAlt: 'Little Rituals, Bradford-on-Avon',
+		attributionLabel: 'Little Rituals website',
+		attributionUrl: 'https://www.little-rituals.co.uk/'
+	},
+	{
+		title: 'Thai Barn',
+		duration: '1-2 mins',
+		summary: 'Family favourite Thai.',
+		image:
+			'https://static.wixstatic.com/media/52bade_896be294cc784e2b88387a57818a12de~mv2_d_6000_4000_s_4_2.jpg/v1/fill/w_980%2Ch_653%2Cal_c%2Cq_85%2Cusm_0.66_1.00_0.01%2Cenc_avif%2Cquality_auto/52bade_896be294cc784e2b88387a57818a12de~mv2_d_6000_4000_s_4_2.jpg',
+		imageAlt: 'Thai Barn, Bradford-on-Avon',
+		attributionLabel: 'Thai Barn website',
+		attributionUrl: 'https://www.thaibarn.co.uk/'
+	},
+	{
+		title: 'The Bridge Tea Rooms',
+		duration: '4 mins',
+		summary: 'Highly regarded traditional and cosy spot for afternoon tea.',
+		image:
+			'https://commons.wikimedia.org/wiki/Special:FilePath/Bradford%20on%20Avon%20-%20The%20Bridge%20Tea%20Rooms%20-%20geograph.org.uk%20-%204546766.jpg',
+		imageAlt: 'The Bridge Tea Rooms in Bradford-on-Avon',
+		attributionLabel: 'Rob Farrow (CC BY-SA 2.0)',
+		attributionUrl:
+			'https://commons.wikimedia.org/wiki/File:Bradford_on_Avon_-_The_Bridge_Tea_Rooms_-_geograph.org.uk_-_4546766.jpg'
+	},
+	{
+		title: 'FIG',
+		duration: '3 mins',
+		summary: 'New brunch spot in the Shambles.',
+		image:
+			'https://commons.wikimedia.org/wiki/Special:FilePath/Bradford-on-Avon%20panorama,%20Wiltshire,%20UK%20-%20Diliff.jpg',
+		imageAlt: 'Bradford-on-Avon high street and rooftops',
+		attributionLabel: 'Diliff (CC BY-SA 3.0)',
+		attributionUrl:
+			'https://commons.wikimedia.org/wiki/File:Bradford-on-Avon_panorama,_Wiltshire,_UK_-_Diliff.jpg',
+		isPlaceholder: true
+	},
+	{
+		title: 'Ravello',
+		duration: '3 mins',
+		summary: 'Classic Italian.',
+		image: '/images/street1.jpeg',
+		imageAlt: 'Ravello area in Bradford-on-Avon',
+		attributionLabel: 'Local BOA photo',
+		attributionUrl: '/images/street1.jpeg',
+		isPlaceholder: true
+	},
+	{
+		title: 'Three Horseshoes',
+		duration: '1 min',
+		summary: 'Local pub; food trucks and live music.',
+		image:
+			'https://s0.geograph.org.uk/geophotos/02/63/81/2638151_c94c1a5c.jpg',
+		imageAlt: 'The Three Horseshoes, Bradford-on-Avon',
+		attributionLabel: 'Jaggery (CC BY-SA 2.0)',
+		attributionUrl: 'https://www.geograph.org.uk/photo/2638151'
+	},
+	{
+		title: 'Castle Inn',
+		duration: '8-10 mins uphill',
+		summary: 'Good food, views, and cider.',
+		image:
+			'https://lirp.cdn-website.com/6f235160/dms3rep/multi/opt/DSC05170-2b7fdb92-1920w.jpg',
+		imageAlt: 'The Castle Inn, Bradford-on-Avon',
+		attributionLabel: 'The Castle Inn website',
+		attributionUrl: 'https://www.thecastleinnboa.co.uk/'
+	},
+	{
+		title: 'The Little Barn',
+		duration: '15-18 mins',
+		summary: 'Family-friendly cafe with exceptional food next to Tithe Barn.',
+		image: '/images/tithebarn.jpeg',
+		imageAlt: 'Tithe Barn exterior area near The Little Barn',
+		attributionLabel: 'Local BOA photo',
+		attributionUrl: '/images/tithebarn.jpeg',
+		isPlaceholder: true
+	},
+	{
+		title: 'The George',
+		duration: '22-25 mins',
+		summary: 'Exceptional cooking and off the beaten track.',
+		image:
+			'https://commons.wikimedia.org/wiki/Special:FilePath/The%20George,%20Woolley%20Street%20-%20geograph.org.uk%20-%20613917.jpg',
+		imageAlt: 'The George on Woolley Street, Bradford-on-Avon',
+		attributionLabel: 'Geograph / Wikimedia Commons',
+		attributionUrl:
+			'https://commons.wikimedia.org/wiki/Category:Woolley_Street,_Bradford-on-Avon'
+	},
+	{
+		title: 'The Bunch of Grapes',
+		duration: '45-55 mins',
+		summary: 'Characterful countryside pub-restaurant known for quality food.',
+		image: '/images/bridge.jpeg',
+		imageAlt: 'Countryside dining route from Bradford-on-Avon',
+		attributionLabel: 'Local BOA photo',
+		attributionUrl: '/images/bridge.jpeg',
+		isPlaceholder: true
+	},
+	{
+		title: 'The DogHouse',
+		duration: '3 mins',
+		summary: 'Pet friendly cafe (outdoor seating only) and pet shop.',
+		image: '/images/street1.jpeg',
+		imageAlt: 'The DogHouse area in Bradford-on-Avon',
+		attributionLabel: 'Local BOA photo',
+		attributionUrl: '/images/street1.jpeg',
+		isPlaceholder: true
+	}
+];
+---
+
+<Layout title="Eat & Drink in BOA | The Stables" description="Walking-time food and drink recommendations from The Stables in Bradford-on-Avon.">
+	<div class="page">
+		<SiteNav currentPath={Astro.url.pathname} />
+		<main>
+			<header class="hero">
+				<p class="eyebrow">Local Food Guide</p>
+				<h1>Eat and Drink</h1>
+				<p>
+					Walking times are from 14c St Margaret's Street. All places listed have decent options
+					for dietary restrictions.
+				</p>
+				<div class="hero-meta">
+					<p><span class="icon icon-route"></span>All walkable from the cottage</p>
+					<p><span class="icon icon-clock"></span>Quick timings included</p>
+					<p><span class="icon icon-map"></span>Mix of coffee, brunch, pubs, and dinner</p>
+				</div>
+			</header>
+
+			<section class="food-grid" aria-label="BOA food and drink recommendations">
+				{venues.map((venue) => (
+					<article class="food-card">
+						<div class="image-wrap">
+							<img src={venue.image} alt={venue.imageAlt} loading="lazy" />
+							{venue.isPlaceholder && (
+								<div class="placeholder-note">
+									Photo coming soon
+								</div>
+							)}
+						</div>
+						<div class="content">
+							<h2>{venue.title}</h2>
+							<p class="meta-row"><span class="icon icon-clock"></span><span class="duration">{venue.duration}</span></p>
+							<p>{venue.summary}</p>
+							<p class="credit">
+								Photo:
+								<a href={venue.attributionUrl} target="_blank" rel="noreferrer">{venue.attributionLabel}</a>
+							</p>
+						</div>
+					</article>
+				))}
+			</section>
+		</main>
+	</div>
+</Layout>
+
+<style>
+	.page {
+		min-height: 100vh;
+		padding: 2rem 1.25rem 3rem;
+		background:
+			radial-gradient(circle at 10% 0%, rgba(182, 132, 58, 0.16), transparent 36%),
+			radial-gradient(circle at 100% 100%, rgba(42, 75, 57, 0.17), transparent 36%),
+			#f5efe4;
+	}
+
+	main {
+		max-width: 980px;
+		margin: 0 auto;
+	}
+
+	.hero {
+		padding-top: 0.7rem;
+	}
+
+	.eyebrow {
+		margin: 0 0 0.4rem;
+		font-size: 0.78rem;
+		letter-spacing: 0.12em;
+		text-transform: uppercase;
+		color: #6e5d43;
+	}
+
+	h1 {
+		font-family: 'Palatino Linotype', 'Book Antiqua', Palatino, serif;
+		font-size: clamp(2rem, 4.8vw, 3.2rem);
+		margin: 0;
+	}
+
+	.hero p {
+		max-width: 68ch;
+		margin: 0.7rem 0 0;
+		color: #40362b;
+	}
+
+	.hero-meta {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 0.85rem;
+		margin-top: 0.8rem;
+	}
+
+	.hero-meta p {
+		display: inline-flex;
+		align-items: center;
+		gap: 0.4rem;
+		margin: 0;
+		font-size: 0.86rem;
+		color: #5b4c39;
+	}
+
+	.food-grid {
+		margin-top: 1.3rem;
+		display: grid;
+		grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+		gap: 1rem;
+	}
+
+	.food-card {
+		background: rgba(255, 255, 255, 0.78);
+		border: 1px solid rgba(96, 74, 43, 0.2);
+		border-radius: 14px;
+		overflow: hidden;
+	}
+
+	.food-card img {
+		width: 100%;
+		height: 170px;
+		object-fit: cover;
+		display: block;
+	}
+
+	.image-wrap {
+		position: relative;
+	}
+
+	.placeholder-note {
+		position: absolute;
+		inset: 0;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		border-radius: 10px;
+		background: rgba(24, 31, 28, 0.42);
+		color: #f5efe4;
+		font-size: 0.8rem;
+		font-weight: 650;
+		letter-spacing: 0.04em;
+		text-transform: uppercase;
+		text-align: center;
+		text-shadow: 0 1px 2px rgba(0, 0, 0, 0.45);
+	}
+
+	.content {
+		padding: 0.9rem;
+	}
+
+	.content h2 {
+		margin: 0;
+		font-size: 1.15rem;
+		font-family: 'Palatino Linotype', 'Book Antiqua', Palatino, serif;
+	}
+
+	.meta-row {
+		display: inline-flex;
+		align-items: center;
+		gap: 0.42rem;
+		margin: 0.55rem 0 0;
+	}
+
+	.duration {
+		display: inline-block;
+		padding: 0.18rem 0.5rem;
+		border-radius: 999px;
+		font-size: 0.78rem;
+		font-weight: 600;
+		background: #ebe0cc;
+		color: #5b4728;
+	}
+
+	.icon {
+		display: inline-block;
+		width: 0.62rem;
+		height: 0.62rem;
+		border-radius: 999px;
+		background: #78613f;
+		flex: none;
+	}
+
+	.icon-clock {
+		background: #5f7c67;
+	}
+
+	.icon-map {
+		background: #7d5a78;
+	}
+
+	.content p {
+		margin: 0.65rem 0 0;
+		color: #3f3429;
+	}
+
+	.credit {
+		font-size: 0.86rem;
+	}
+
+	.credit a {
+		color: #2f4b39;
+		text-decoration: none;
+		font-weight: 600;
+	}
+
+	.credit a:hover {
+		text-decoration: underline;
+	}
+</style>

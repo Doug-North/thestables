@@ -1,0 +1,419 @@
+---
+import Layout from '../layouts/Layout.astro';
+import SiteNav from '../components/SiteNav.astro';
+
+const airbnbUrl = 'https://airbnb.co.uk/h/thestables-boa';
+const bookingUrl =
+	'https://www.booking.com/hotel/gb/the-stables-cottage-in-the-heart-of-boa-private-garden.en-gb.html?label=gen173bo-10CAsoUEI2dGhlLXN0YWJsZXMtY290dGFnZS1pbi10aGUtaGVhcnQtb2YtYm9hLXByaXZhdGUtZ2FyZGVuSDNYA2hCiAEBmAEzuAEHyAEM2AED6AEB-AEBiAIBmAIGqAIBuAKC-YrNBsACAdICJDlkZDliNzY1LTgzOTItNGM3MS05MTNhLWUwODQxMjFiMDI2YtgCAeACAQ&sid=7982eaac9a173a8541ae21183a07850c&dist=0&sb_price_type=total&type=total&';
+
+const quickLinks = [
+	{
+		title: 'Walks',
+		href: '/walks',
+		description: 'Canal routes, meadow loops, and viewpoints with realistic timings.'
+	},
+	{
+		title: 'History',
+		href: '/history',
+		description: 'Saxon church, Tithe Barn, bridge history, and must-see landmarks.'
+	},
+	{
+		title: 'Bath Day Trip',
+		href: '/bath',
+		description: 'Roman Baths, museums, and easy family ideas one short train away.'
+	},
+	{
+		title: 'Eat & Drink',
+		href: '/eat-drink',
+		description: 'Pubs, restaurants, and cosy spots for long lunches and evenings.'
+	},
+	{
+		title: 'Stay',
+		href: '/stay',
+		description: 'Why The Stables works as a calm base right in the heart of BOA.'
+	}
+];
+---
+
+<Layout
+	title="Bradford-on-Avon Guide | The Stables"
+	description="Our favourite town. Discover Bradford-on-Avon and stay with us at The Stables."
+>
+	<div class="page">
+		<SiteNav currentPath={Astro.url.pathname} />
+
+		<main>
+			<header class="hero" aria-label="Our favourite town">
+				<div class="hero-bg hero-bg-one" aria-hidden="true"></div>
+				<div class="hero-bg hero-bg-two" aria-hidden="true"></div>
+
+				<div class="hero-copy">
+					<p class="eyebrow">Bradford-on-Avon Local Guide</p>
+					<h1>Our favourite town</h1>
+					<p>
+						We fell in love with Bradford on Avon and have always encouraged friends and family
+						to visit if they have not discovered it yet. Now we have our own little cottage in
+						the centre, open to holiday guests who appreciate gems like BOA.
+					</p>
+					<div class="hero-actions">
+						<a class="cta primary" href={airbnbUrl} target="_blank" rel="noreferrer">
+							<img
+								class="brand-icon"
+								src="https://www.airbnb.com/favicon.ico"
+								alt=""
+								aria-hidden="true"
+								loading="lazy"
+								decoding="async"
+							/>
+							<span>Stay with us on Airbnb</span>
+						</a>
+						<a class="cta secondary" href={bookingUrl} target="_blank" rel="noreferrer">
+							<span class="brand-icon brand-booking brand-booking-large" aria-hidden="true">B</span>
+							<span>Stay with us on Booking.com</span>
+						</a>
+					</div>
+				</div>
+
+				<div class="hero-media" aria-hidden="true">
+					<figure class="main-shot">
+						<img src="/images/bridge.jpeg" alt="" loading="eager" decoding="async" />
+					</figure>
+				</div>
+			</header>
+
+			<section class="quick" aria-labelledby="quick-title">
+				<div class="quick-head">
+					<h2 id="quick-title">Start here</h2>
+					<a href="/stay">View The Stables</a>
+				</div>
+				<div class="quick-grid">
+					{quickLinks.map((item) => (
+						<a class="quick-card" href={item.href}>
+							<h3>{item.title}</h3>
+							<p>{item.description}</p>
+						</a>
+					))}
+				</div>
+			</section>
+		</main>
+	</div>
+</Layout>
+
+<style>
+	.page {
+		min-height: 100vh;
+		padding: 2rem 1.25rem 3rem;
+		background:
+			radial-gradient(circle at 12% -8%, rgba(173, 130, 64, 0.22), transparent 45%),
+			radial-gradient(circle at 88% 108%, rgba(31, 74, 59, 0.2), transparent 46%),
+			#f5efe4;
+	}
+
+	main {
+		max-width: 980px;
+		margin: 0 auto;
+	}
+
+	.hero {
+		position: relative;
+		display: grid;
+		grid-template-columns: 1.05fr 0.95fr;
+		gap: 1rem;
+		margin-top: 1rem;
+		padding: clamp(1rem, 2.6vw, 1.7rem);
+		border-radius: 22px;
+		border: 1px solid rgba(97, 73, 38, 0.25);
+		background:
+			linear-gradient(145deg, rgba(255, 252, 246, 0.82), rgba(248, 240, 227, 0.72));
+		box-shadow:
+			0 24px 36px rgba(50, 38, 21, 0.12),
+			0 1px 0 rgba(255, 255, 255, 0.8) inset;
+		overflow: hidden;
+	}
+
+	.hero::before {
+		content: '';
+		position: absolute;
+		inset: 10px;
+		border: 1px solid rgba(121, 92, 52, 0.22);
+		border-radius: 16px;
+		pointer-events: none;
+	}
+
+	.hero-bg {
+		position: absolute;
+		border-radius: 999px;
+		filter: blur(4px);
+		pointer-events: none;
+	}
+
+	.hero-bg-one {
+		width: 280px;
+		height: 280px;
+		top: -100px;
+		right: -70px;
+		background: radial-gradient(circle, rgba(53, 92, 70, 0.24), transparent 70%);
+		animation: floatA 9s ease-in-out infinite;
+	}
+
+	.hero-bg-two {
+		width: 240px;
+		height: 240px;
+		left: -90px;
+		bottom: -130px;
+		background: radial-gradient(circle, rgba(179, 135, 68, 0.24), transparent 70%);
+		animation: floatB 8s ease-in-out infinite;
+	}
+
+	.hero-copy {
+		position: relative;
+		z-index: 2;
+		padding: 0.2rem 0.2rem 0.2rem 0;
+	}
+
+	.eyebrow {
+		margin: 0;
+		font-size: 0.78rem;
+		letter-spacing: 0.12em;
+		text-transform: uppercase;
+		color: #6e5d43;
+	}
+
+	h1 {
+		margin: 0.35rem 0 0;
+		font-family: 'Palatino Linotype', 'Book Antiqua', Palatino, serif;
+		font-size: clamp(2.2rem, 6vw, 4.4rem);
+		line-height: 0.98;
+		color: #2d251b;
+	}
+
+	.hero-copy p {
+		margin: 0.82rem 0 0;
+		max-width: 48ch;
+		font-size: 1.03rem;
+		color: #45392d;
+	}
+
+	.hero-actions {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 0.7rem;
+		margin-top: 1.08rem;
+	}
+
+	.cta {
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		gap: 0.45rem;
+		text-decoration: none;
+		padding: 0.7rem 1.06rem;
+		border-radius: 999px;
+		font-weight: 650;
+		font-size: 0.92rem;
+		transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+	}
+
+	.cta:hover {
+		transform: translateY(-1px);
+	}
+
+	.cta.primary {
+		background: #2f4b39;
+		color: #f6f2eb;
+		box-shadow: 0 8px 16px rgba(36, 58, 44, 0.22);
+	}
+
+	.cta.primary:hover {
+		background: #263d2f;
+	}
+
+	.cta.secondary {
+		background: #2f4b39;
+		color: #f6f2eb;
+		border: 1px solid transparent;
+	}
+
+	.cta.secondary:hover {
+		background: #263d2f;
+	}
+
+	.brand-icon {
+		width: 16px;
+		height: 16px;
+		border-radius: 3px;
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		font-size: 0.62rem;
+		font-weight: 700;
+		line-height: 1;
+		flex: none;
+	}
+
+	.brand-booking {
+		background: #003b95;
+		color: #fff;
+	}
+
+	.brand-booking-large {
+		width: 18px;
+		height: 18px;
+		font-size: 0.74rem;
+		font-weight: 800;
+	}
+
+	.hero-media {
+		position: relative;
+		z-index: 2;
+		min-height: 320px;
+	}
+
+	.main-shot {
+		margin: 0;
+		height: 100%;
+		border-radius: 16px;
+		overflow: hidden;
+		border: 1px solid rgba(70, 55, 33, 0.3);
+		box-shadow: 0 12px 24px rgba(40, 30, 16, 0.18);
+	}
+
+	.main-shot img {
+		display: block;
+		width: 100%;
+		height: 100%;
+		min-height: 320px;
+		object-fit: cover;
+		transform: scale(1.04);
+		transition: transform 0.8s ease;
+	}
+
+	.hero:hover .main-shot img {
+		transform: scale(1.08);
+	}
+
+	.quick {
+		margin-top: 1.3rem;
+	}
+
+	.quick-head {
+		display: flex;
+		align-items: baseline;
+		justify-content: space-between;
+		gap: 1rem;
+		flex-wrap: wrap;
+	}
+
+	.quick-head h2 {
+		margin: 0;
+		font-family: 'Palatino Linotype', 'Book Antiqua', Palatino, serif;
+		font-size: clamp(1.4rem, 2.7vw, 2rem);
+	}
+
+	.quick-head a {
+		text-decoration: none;
+		font-weight: 600;
+		color: #274233;
+	}
+
+	.quick-head a:hover {
+		text-decoration: underline;
+	}
+
+	.quick-grid {
+		margin-top: 0.78rem;
+		display: grid;
+		grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+		gap: 0.85rem;
+	}
+
+	.quick-card {
+		display: block;
+		text-decoration: none;
+		color: inherit;
+		background: rgba(255, 255, 255, 0.77);
+		border: 1px solid rgba(96, 74, 43, 0.2);
+		border-radius: 14px;
+		padding: 0.9rem;
+		position: relative;
+		transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+	}
+
+	.quick-card::after {
+		content: '';
+		position: absolute;
+		left: 0;
+		top: 0;
+		bottom: 0;
+		width: 4px;
+		border-radius: 14px 0 0 14px;
+		background: linear-gradient(180deg, #496f59, #b98945);
+		opacity: 0.75;
+	}
+
+	.quick-card:hover {
+		transform: translateY(-3px);
+		border-color: rgba(47, 75, 57, 0.5);
+		box-shadow: 0 12px 20px rgba(53, 41, 23, 0.1);
+	}
+
+	.quick-card h3 {
+		margin: 0;
+		font-size: 1.05rem;
+	}
+
+	.quick-card p {
+		margin: 0.52rem 0 0;
+		color: #45382b;
+	}
+
+	@keyframes floatA {
+		0%,
+		100% { transform: translateY(0); }
+		50% { transform: translateY(10px); }
+	}
+
+	@keyframes floatB {
+		0%,
+		100% { transform: translateY(0); }
+		50% { transform: translateY(-12px); }
+	}
+
+	@media (max-width: 900px) {
+		.hero {
+			grid-template-columns: 1fr;
+		}
+
+		.hero-media {
+			min-height: 290px;
+		}
+
+		.main-shot img {
+			min-height: 290px;
+		}
+
+	}
+
+	@media (max-width: 700px) {
+		.page {
+			padding-top: 1.35rem;
+		}
+
+		.hero {
+			border-radius: 18px;
+		}
+
+		.hero::before {
+			inset: 8px;
+		}
+
+		.hero-media {
+			min-height: 250px;
+		}
+
+		.main-shot img {
+			min-height: 250px;
+		}
+
+	}
+</style>

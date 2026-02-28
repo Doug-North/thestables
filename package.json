@@ -1,0 +1,25 @@
+{
+  "name": "bradford-on-avon",
+  "type": "module",
+  "version": "0.0.1",
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "astro": "astro",
+    "cf:dev": "wrangler dev",
+    "cf:deploy": "wrangler deploy",
+    "cf:deploy:cleanup": "wrangler deploy --config wrangler.cleanup.toml",
+    "cf:tail:cleanup": "wrangler tail --config wrangler.cleanup.toml",
+    "d1:migrate": "wrangler d1 execute boa_site --file=db/schema.sql --remote",
+    "d1:cleanup:local": "wrangler d1 execute boa_site --file=db/cleanup.sql --local",
+    "d1:cleanup:remote": "wrangler d1 execute boa_site --file=db/cleanup.sql --remote"
+  },
+  "dependencies": {
+    "@astrojs/cloudflare": "^12.6.7",
+    "astro": "^5.17.1"
+  },
+  "devDependencies": {
+    "wrangler": "^4.36.0"
+  }
+}
