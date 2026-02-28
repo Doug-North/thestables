@@ -15,14 +15,23 @@ const {
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
+		<link rel="icon" type="image/png" href="/boa-bridge.png" />
 		<meta name="generator" content={Astro.generator} />
 		<meta name="description" content={description} />
 		<title>{title}</title>
 	</head>
 	<body>
+		<div class="bg-pattern" aria-hidden="true"></div>
 		<slot />
+		<footer>
+			<div class="footer-content">
+				<div class="contact-section">
+					<p>Any questions relating to The Stables, just ask.</p>
+					<a href="mailto:douglasnorthca@gmail.com" class="contact-button">Contact Us</a>
+				</div>
+				<p class="designer-credit">Web Design by Douglas North</p>
+			</div>
+		</footer>
 	</body>
 </html>
 
@@ -46,5 +55,74 @@ const {
 	body {
 		background: #f5efe4;
 		color: #2d2a26;
+	}
+
+	.bg-pattern {
+		position: fixed;
+		inset: 0;
+		z-index: -1;
+		background-image: url('/georgian-pattern.png');
+		background-size: 650px;
+		background-repeat: repeat;
+		opacity: 0.95;
+		-webkit-mask-image: linear-gradient(135deg, black 35%, transparent 92%);
+		mask-image: linear-gradient(135deg, black 35%, transparent 92%);
+		pointer-events: none;
+	}
+
+	footer {
+		margin-top: 4rem;
+		padding: 3rem 1.25rem 4rem;
+		background: linear-gradient(to bottom, transparent, rgba(162, 122, 68, 0.05));
+		border-top: 1px solid rgba(106, 81, 47, 0.08);
+	}
+
+	.footer-content {
+		max-width: 980px;
+		margin: 0 auto;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		text-align: center;
+		gap: 2.5rem;
+	}
+
+	.contact-section p {
+		font-family: 'Palatino Linotype', 'Book Antiqua', Palatino, serif;
+		font-size: 1.15rem;
+		color: #4a3f33;
+		margin-bottom: 1.2rem;
+		font-style: italic;
+	}
+
+	.contact-button {
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		text-decoration: none;
+		background: transparent;
+		color: #2f4b39;
+		border: 1px solid rgba(47, 75, 57, 0.4);
+		border-radius: 999px;
+		padding: 0.6rem 1.4rem;
+		font-weight: 600;
+		font-size: 0.92rem;
+		transition: all 0.2s ease;
+	}
+
+	.contact-button:hover {
+		background: #2f4b39;
+		color: #f6f2eb;
+		transform: translateY(-1px);
+		box-shadow: 0 4px 12px rgba(47, 75, 57, 0.15);
+	}
+
+	.designer-credit {
+		font-family: Baskerville, 'Goudy Old Style', serif;
+		font-size: 0.72rem;
+		text-transform: uppercase;
+		letter-spacing: 0.2em;
+		color: #8c8173;
+		opacity: 0.8;
 	}
 </style>
